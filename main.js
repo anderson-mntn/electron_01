@@ -13,7 +13,10 @@ function createWindow(){
         backgroundColor: '#12e321',
         show: false,
         icon: path.join(__dirname, 'assets', 'icons', 'ak47.png'),
-        webPreferences: { nodeIntegration: true },
+        webPreferences: { 
+            nodeIntegration: true,
+            contextIsolation: false,
+        },
     });
 
     win.loadFile('./src/index.html');
