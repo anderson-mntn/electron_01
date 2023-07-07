@@ -16,10 +16,18 @@ function createWindow(){
     //isDev ?  win.webContents.openDevTools() : console.log('not dev')
     
     isWin32 ? win.webContents.openDevTools() : console.log('not windows');
-
 }
 
 app.whenReady().then(()=>{
     console.log('app ready!');
+    createWindow();
+})
+
+app.on('window-all-closed', ()=>{
+    console.log("Todas as janelas fechadas")
+    app.quit();
+})
+
+app.on("activate", ()=>{
     createWindow();
 })
