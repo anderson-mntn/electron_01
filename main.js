@@ -1,5 +1,6 @@
-const {app, BrowserWindow} = require('electron')
-const path = require('path')
+const {app, BrowserWindow} = require('electron');
+const path = require('path');
+const os = require('os');
 
 const isDev = process.env.NODE_ENV === "development" ? true : false ;
 
@@ -12,6 +13,7 @@ function createWindow(){
         backgroundColor: '#12e321',
         show: false,
         icon: path.join(__dirname, 'assets', 'icons', 'ak47.png'),
+        webPreferences: { nodeIntegration: true },
     });
 
     win.loadFile('./src/index.html');
@@ -23,13 +25,12 @@ function createWindow(){
     win.once('ready-to-show',()=>{
         win.show();
     })
-
-
 }
 
 app.whenReady().then(()=>{
     console.log('app ready!');
     createWindow();
+    console.log(os.cpus()[0].model) //nome do processador
 })
 
 // app.on('window-all-closed', ()=>{
