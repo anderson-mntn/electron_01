@@ -9,6 +9,7 @@ function createWindow(){
         width: 777,
         height: 777,
         backgroundColor: '#12e321',
+        show: false,
     });
 
     win.loadFile('./src/index.html');
@@ -16,6 +17,12 @@ function createWindow(){
     //isDev ?  win.webContents.openDevTools() : console.log('not dev')
     
     isWin32 ? win.webContents.openDevTools() : console.log('not windows');
+
+    win.once('ready-to-show',()=>{
+        win.show();
+    })
+
+
 }
 
 app.whenReady().then(()=>{
@@ -23,10 +30,10 @@ app.whenReady().then(()=>{
     createWindow();
 })
 
-app.on('window-all-closed', ()=>{
-    console.log("Todas as janelas fechadas")
-    app.quit();
-})
+// app.on('window-all-closed', ()=>{
+//     console.log("Todas as janelas fechadas")
+//     app.quit();
+// })
 
 app.on("activate", ()=>{
     createWindow();
