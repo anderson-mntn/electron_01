@@ -1,4 +1,5 @@
 const {app, BrowserWindow} = require('electron')
+const path = require('path')
 
 const isDev = process.env.NODE_ENV === "development" ? true : false ;
 
@@ -10,6 +11,7 @@ function createWindow(){
         height: 777,
         backgroundColor: '#12e321',
         show: false,
+        icon: path.join(__dirname, 'assets', 'icons', 'ak47.png'),
     });
 
     win.loadFile('./src/index.html');
@@ -36,5 +38,7 @@ app.whenReady().then(()=>{
 // })
 
 app.on("activate", ()=>{
-    createWindow();
+    if(BrowserWindow.getAllWindows().length === 0){
+        createWindow();
+    }
 })
