@@ -1,4 +1,4 @@
-const {app, BrowserWindow, ipcMain} = require('electron');
+const {app, BrowserWindow, ipcMain, Menu} = require('electron');
 require('dotenv').config()
 const path = require('path');
 const os = require('os');
@@ -31,6 +31,14 @@ function createWindow(){
         }, 3000)
         
     })
+
+    // Read documentation to see all roles. 
+    const menuTemplate =[
+        { role: 'appMenu' },
+        { role: 'fileMenu' }
+    ]
+    const menu = Menu.buildFromTemplate(menuTemplate)
+    Menu.setApplicationMenu(menu)
 }
 
 app.whenReady().then(()=>{
