@@ -12,9 +12,15 @@
     <h3 id="processor"></h3>
 
     <script>
-        const os = require("os");
+        const{ ipcRenderer } = require('electron');
+        ipcRenderer.on('cpu_info', (event, value)=>{
+            processor.innerHTML = value;
+        })
+
+
+        //const os = require("os");
         const processor = document.querySelector('#processor');
-        processor.innerHTML = os.cpus()[0].model;
+        //processor.innerHTML = os.cpus()[0].model;
     </script>
 </body>
 </html>

@@ -21,13 +21,15 @@ function createWindow(){
     });
 
     win.loadFile('./src/index.html');
-
-    //isDev ?  win.webContents.openDevTools() : console.log('not dev')
     
     isWin32 ? win.webContents.openDevTools() : console.log('not windows');
 
     win.once('ready-to-show',()=>{
         win.show();
+        setTimeout(()=>{
+            win.webContents.send('cpu_info', os.cpus()[0].model)
+        }, 3000)
+        
     })
 }
 
@@ -44,8 +46,8 @@ app.whenReady().then(()=>{
 //     app.quit();
 // })
 
-app.on("activate", ()=>{
-    if(BrowserWindow.getAllWindows().length === 0){
-        createWindow();
-    }
-})
+// app.on("activate", ()=>{
+//     if(BrowserWindow.getAllWindows().length === 0){
+//         createWindow();
+//     }
+// })
