@@ -1,4 +1,5 @@
 const {app, BrowserWindow} = require('electron');
+require('dotenv').config()
 const path = require('path');
 const os = require('os');
 
@@ -34,6 +35,8 @@ app.whenReady().then(()=>{
     console.log('app ready!');
     createWindow();
     console.log(os.cpus()[0].model) //nome do processador
+
+    console.log(isDev)
 })
 
 // app.on('window-all-closed', ()=>{
