@@ -1,4 +1,4 @@
-const {app, BrowserWindow} = require('electron');
+const {app, BrowserWindow, ipcMain} = require('electron');
 require('dotenv').config()
 const path = require('path');
 const os = require('os');
@@ -51,3 +51,7 @@ app.whenReady().then(()=>{
 //         createWindow();
 //     }
 // })
+
+ipcMain.on('open_new_window', ()=>{
+    createWindow();
+})

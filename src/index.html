@@ -10,6 +10,7 @@
 
     <h1> First Electron App</h1>
     <h3 id="processor"></h3>
+    <button onclick="sendOpenWindowMsgToBack()">Open New Window</button>
 
     <script>
         const{ ipcRenderer } = require('electron');
@@ -21,6 +22,10 @@
         //const os = require("os");
         const processor = document.querySelector('#processor');
         //processor.innerHTML = os.cpus()[0].model;
+
+        function sendOpenWindowMsgToBack(){
+            ipcRenderer.send('open_new_window')
+        }
     </script>
 </body>
 </html>
