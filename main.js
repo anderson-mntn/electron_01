@@ -1,17 +1,17 @@
-const {app, BrowserWindow, ipcMain, Menu} = require('electron');
-require('dotenv').config()
+const {app, BrowserWindow, ipcMain, Menu, globalShortcut} = require('electron');
+//require('dotenv').config()
 const path = require('path');
 const os = require('os');
 
-const isDev = process.env.NODE_ENV === "development" ? true : false ;
+//const isDev = process.env.NODE_ENV === "development" ? true : false ;
 
 const isWin32 = process.platform === 'win32' ? true : false ;
 const isMac = process.platform === 'darwin' ? true : false ;
 
 function createWindow(){
     const win = new BrowserWindow({
-        width: 777,
-        height: 777,
+        width: 600,
+        height: 600,
         backgroundColor: '#12e321',
         show: false,
         icon: path.join(__dirname, 'assets', 'icons', 'ak47.png'),
@@ -50,11 +50,15 @@ function createWindow(){
                 { 
                     label : 'Close all windows',
                     accelerator: isMac ? 'Cmd+b': 'Ctrl+b',
-                    click: ()=>{BrowserWindow.getAllWindows().forEach(window =>{window.close()})}
+                    click: ()=>{
+                        //BrowserWindow.getAllWindows().forEach(window =>{window.close()}),
+                        console.log("Atalho ativado")
+                    }
                 }
             ]
         }
     ]
+
     const menu = Menu.buildFromTemplate(menuTemplate)
     Menu.setApplicationMenu(menu)
 }
@@ -64,7 +68,18 @@ app.whenReady().then(()=>{
     createWindow();
     console.log(os.cpus()[0].model) //nome do processador
 
-    console.log(isDev)
+    //console.log(isDev)
+
+    globalShortcut.register('CmdOrCtrl+g',()=>{
+        BrowserWindow.getAllWindows()[0].setAlwaysOnTop(true) // Parece o modo picture to picture de videos
+    })
+    globalShortcut.register('CmdOrCtrl+h',()=>{
+        BrowserWindow.getAllWindows()[0].setAlwaysOnTop(false)
+    })
+})
+
+app.on('will-quit',()=>{
+    globalShortcut.unregisterAll()
 })
 
 // app.on('window-all-closed', ()=>{
