@@ -6,6 +6,7 @@ const os = require('os');
 const isDev = process.env.NODE_ENV === "development" ? true : false ;
 
 const isWin32 = process.platform === 'win32' ? true : false ;
+const isMac = process.platform === 'darwin' ? true : false ;
 
 function createWindow(){
     const win = new BrowserWindow({
@@ -48,6 +49,7 @@ function createWindow(){
                 },
                 { 
                     label : 'Close all windows',
+                    accelerator: isMac ? 'Cmd+b': 'Ctrl+b',
                     click: ()=>{BrowserWindow.getAllWindows().forEach(window =>{window.close()})}
                 }
             ]
