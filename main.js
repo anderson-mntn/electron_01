@@ -42,6 +42,13 @@ function createWindow(){
                 {
                     label: 'New Window',
                     click: ()=> {createWindow() }
+                },
+                {
+                    type: 'separator'
+                },
+                { 
+                    label : 'Close all windows',
+                    click: ()=>{BrowserWindow.getAllWindows().forEach(window =>{window.close()})}
                 }
             ]
         }
