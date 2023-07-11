@@ -35,7 +35,16 @@ function createWindow(){
     // Read documentation to see all roles. 
     const menuTemplate =[
         { role: 'appMenu' },
-        { role: 'fileMenu' }
+        { role: 'fileMenu' },
+        {
+            label: 'Window',
+            submenu: [
+                {
+                    label: 'New Window',
+                    click: ()=> {createWindow() }
+                }
+            ]
+        }
     ]
     const menu = Menu.buildFromTemplate(menuTemplate)
     Menu.setApplicationMenu(menu)
